@@ -10,6 +10,8 @@ File.open('weather.txt', 'w') do |f|
 	puts weather.text
 end
 =end
+
+#want to make the css background image change depending on the temperature range
 File.open('weather.html', 'w') do |f|
 	f.write("<!DOCTYPE html>\n<head>\n<title> Weather Deconstructed </title>\n<link rel= \"stylesheet\" href=\"stylesheetweather.css\">\n</head>\n<body>\n<header>\n<h1> Weather for Hamilton, Ontario </h1>\n<hr>\n</header>\n<div>\n")
 	page=Nokogiri::HTML(open("http://www.timeanddate.com/weather/canada/hamilton"))
