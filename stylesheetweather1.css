@@ -1,0 +1,38 @@
+html {
+ background: url(passingclouds.jpg) no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+
+* {
+color: #660099;
+font-size: 25px;
+} 
+h2,
+em.head {
+ font-size:46px;
+}
+footer p,
+footer a{
+color: red;
+}
+div p {
+ margin: auto;
+text-align:center;
+opacity:0.4;
+filter:alpha(opacity=40);
+}
+div p:hover {
+opacity:1.0;
+filter:alpha(opacity=100);
+}
+div p:nth-child(even) {
+color:white;
+background-color:black;
+}
+div p:nth-child(odd) {
+color:black;
+background-color:white;
+}

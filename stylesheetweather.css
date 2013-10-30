@@ -5,3 +5,8 @@ html {
   -o-background-size: cover;
   background-size: cover;
 }
+
+* {
+	color: #660099;
+	font-size: 25px;
+}
