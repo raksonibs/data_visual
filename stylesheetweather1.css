@@ -1,11 +1,14 @@
 html {
- background: url(fog.jpg) no-repeat center center fixed;
+ background: url(sprinkles.jpg) no-repeat center center fixed;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
 background-size: cover;
+}.graph {
+background-color: rgba(120,32,32,0.5);
+border: 1px solid black;
 }
-img#chart {
+img.chart {
 margin:auto;
 }
 * {
@@ -28,6 +31,8 @@ div p {
 text-align:center;
 opacity:0.4;
 filter:alpha(opacity=40);
+border-radius:4%;
+width: 60vw;
 }
 div p:hover {
 opacity:1.0;
@@ -40,4 +45,9 @@ background-color:black;
 div p:nth-child(odd) {
 color:black;
 background-color:white;
+}
+div:not(.graph) {
+background-color: rgba(276,34,54,0.5);
+border-radius: 5%;
+width:80vw;
 }
