@@ -43,7 +43,7 @@ File.open('weather.html', 'w') do |f|
 	timedates=page.css("div div table.tbbox tr.d0 thead tr.c1")[0].text
 	timedates=timedates.scan(/[A-Z][a-z]+/)
 	
-	index=-1
+	index=0
 
 
 	futureweather=futureweather.scan(/\d+/)
@@ -51,6 +51,17 @@ File.open('weather.html', 'w') do |f|
 	currentconditions=val.zip(combinedtimeandweather)
 	data1=currentweather+futureweather
 	data=(currentweather+futureweather).map {|i| i.to_i}
+	if time[0]=="Evening"
+		now="Afternoon"
+	elsif time[0]=="Night"
+		now="Evening"
+	elsif time[0]=="Night"
+		now="Morning"
+	elsif time[0]=="Morning"
+		now="Night"
+	end
+	timevals=time.unshift(now)
+
 
 	chart=Gchart.line(:title => "Temperature over the next few hours", 
 					  :title_size=> 23, 
@@ -58,9 +69,10 @@ File.open('weather.html', 'w') do |f|
 					  :data =>[data],
 					  :size => '600x400',
 					  :axis_with_labels => 'x,y',
-					  :axis_labels => [time,data1])
+					  :axis_labels => [timevals,data1])
 	currentconditions.each do |i|
 		index+=1 if i.flatten[1]=="Night"
+
 
 		f.write("<p>"+"<strong>"+timedates[index]+" "+i.flatten[1]+"</strong>"+" temperature: "+i.flatten[2]+" Celsius" + " Description: <em>"+ i.flatten[0]+ "</em></p>\n")
 	end
@@ -78,7 +90,7 @@ File.open('weather.html', 'w') do |f|
 		f.write("<p>"+i[0]+" temperature: "+i[1]+" Celsius</p>\n")
 	end
 =end
-	f.write("\n</div>\n<div class= \"graph\">\n<img class=\"chart\"src=#{chart}>\n</div>\n<footer>\n<hr>\n<p> Contact me if you are interested in weather </p>\n<p> 905-575-5111 </p>\n<p> skype: oskarniburski </p>\n<a href=\"mailto:oskarniburski@gmail.com\">oskarniburski@gmail.com</a>\n</footer>\n</body>\n</html>")
+	f.write("\n</div>\n<div class= \"graph\">\n<img class=\"chart\"src=#{chart}>\n<img class =\"weatherpic\" src=\"http://www.cdn.mto.gov.on.ca/english/traveller/compass/camera/pictures/BurlCamera/loc04.jpg\">\n</div>\n<footer>\n<hr>\n<p> Contact me if you are interested in weather </p>\n<p> 905-575-5111 </p>\n<p> skype: oskarniburski </p>\n<a href=\"mailto:oskarniburski@gmail.com\">oskarniburski@gmail.com</a>\n</footer>\n</body>\n</html>")
 	File.open("stylesheetweather1.css", "w") do |c|
 
 		pic="clouds.jpg" if currentweatherdesc.match(/cloudy/i)
