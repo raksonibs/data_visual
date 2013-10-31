@@ -1,5 +1,6 @@
 require 'open-uri'
 require 'nokogiri'
+require 'gchart'
 
 =begin
 File.open('weather.txt', 'w') do |f|
@@ -41,25 +42,30 @@ File.open('weather.html', 'w') do |f|
 	timedates=page.css("div div table.tbbox tr.d0 thead tr.c1")[0].text
 	timedates=timedates.scan(/[A-Z][a-z]+/)
 	
-	index=0
+	index=-1
+
 
 	futureweather=futureweather.scan(/\d+/)
 	combinedtimeandweather=time.zip(futureweather)
 	currentconditions=val.zip(combinedtimeandweather)
+	data1=currentweather+futureweather
+	data=(currentweather+futureweather).map {|i| i.to_i}
+
+	chart=Gchart.line(:title => "Temperature over the next few hours", 
+					  :title_size=> 23, 
+					  :title_color=> 'FF0000',
+					  :data =>[data],
+					  :size => '600x400',
+					  :axis_with_labels => 'x,y',
+					  :axis_labels => [time,data1])
 	currentconditions.each do |i|
 		index+=1 if i.flatten[1]=="Night"
 
 		f.write("<p>"+"<strong>"+timedates[index]+" "+i.flatten[1]+"</strong>"+" temperature: "+i.flatten[2]+" Celsius" + " Description: <em>"+ i.flatten[0]+ "</em></p>\n")
 	end
 
-	File.open("stylesheetweather1.css", "w") do |c|
-		pic="clouds.jpg" if currentweatherdesc.match(/cloudy/i)
-		pic="passingclouds.jpg" if currentweatherdesc.match(/scattered|broken|passing/i)
-		pic="rain.jpg" if currentweatherdesc.match(/rain/i) || currentweatherdesc.match(/shower/i)
-		pic="sunny.jpg" if currentweatherdesc.match(/sun/) && !currentweatherdesc.match(/cloud/)
 
-		c.write("html {\n background: url(#{pic}) no-repeat center center fixed;\n-webkit-background-size: cover;\n-moz-background-size: cover;\n-o-background-size: cover;\nbackground-size: cover;\n}\n\n* {\ncolor: #660099;\nfont-size: 25px;\n} \nh2,\nem.head {\n font-size:46px;\nline-height:10%;\n}\nfooter p,\nfooter a,\na{\ncolor: red;\nline-height:10%;\n}\ndiv p {\n margin: auto;\ntext-align:center;\nopacity:0.4;\nfilter:alpha(opacity=40);\n}\ndiv p:hover {\nopacity:1.0;\nfilter:alpha(opacity=100);\n}\ndiv p:nth-child(even) {\ncolor:white;\nbackground-color:black;\n}\ndiv p:nth-child(odd) {\ncolor:black;\nbackground-color:white;\n}")
-	end
+
 
 =begin
 	combinedtimeandweather.each do |i|
@@ -71,6 +77,16 @@ File.open('weather.html', 'w') do |f|
 		f.write("<p>"+i[0]+" temperature: "+i[1]+" Celsius</p>\n")
 	end
 =end
-	f.write("</div>\n<footer>\n<hr>\n<p> Contact me if you are interested in weather </p>\n<p> 905-575-5111 </p>\n<p> skype: oskarniburski </p>\n<a href=\"mailto:oskarniburski@gmail.com\">oskarniburski@gmail.com</a>\n</footer>\n</body>\n</html>")
+	f.write("<img class=\"chart\"src=#{chart}>\n</div>\n<footer>\n<hr>\n<p> Contact me if you are interested in weather </p>\n<p> 905-575-5111 </p>\n<p> skype: oskarniburski </p>\n<a href=\"mailto:oskarniburski@gmail.com\">oskarniburski@gmail.com</a>\n</footer>\n</body>\n</html>")
+	File.open("stylesheetweather1.css", "w") do |c|
+
+		pic="clouds.jpg" if currentweatherdesc.match(/cloudy/i)
+		pic="passingclouds.jpg" if currentweatherdesc.match(/scattered|broken|passing/i)
+		pic="rain.jpg" if currentweatherdesc.match(/rain/i) || currentweatherdesc.match(/shower/i)
+		pic="sunny.jpg" if currentweatherdesc.match(/sun/i) && !currentweatherdesc.match(/cloud/i)
+		pic="fog.jpg" if currentweatherdesc.match(/fog/i)
+
+		c.write("html {\n background: url(#{pic}) no-repeat center center fixed;\n-webkit-background-size: cover;\n-moz-background-size: cover;\n-o-background-size: cover;\nbackground-size: cover;\n}\nimg#chart {\nmargin:auto;\n}\n* {\ncolor: #660099;\nfont-size: 25px;\n} \nh2,\nem.head {\n font-size:46px;\nline-height:10%;\n}\nfooter p,\nfooter a,\na{\ncolor: red;\nline-height:10%;\n}\ndiv p {\n margin: auto;\ntext-align:center;\nopacity:0.4;\nfilter:alpha(opacity=40);\n}\ndiv p:hover {\nopacity:1.0;\nfilter:alpha(opacity=100);\n}\ndiv p:nth-child(even) {\ncolor:white;\nbackground-color:black;\n}\ndiv p:nth-child(odd) {\ncolor:black;\nbackground-color:white;\n}")
+	end
 end
 

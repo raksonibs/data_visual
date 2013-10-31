@@ -1,11 +1,13 @@
 html {
- background: url(sunny.jpg) no-repeat center center fixed;
+ background: url(fog.jpg) no-repeat center center fixed;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
 background-size: cover;
 }
-
+img#chart {
+margin:auto;
+}
 * {
 color: #660099;
 font-size: 25px;
