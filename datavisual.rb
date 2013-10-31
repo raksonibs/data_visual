@@ -30,7 +30,8 @@ File.open('weather.html', 'w') do |f|
 	futureweather=page.css("div div table.tbbox tr.d0 table tbody tr.c0")[1].text
 	currentweather=currentweather.scan(/\d+/)
 	
-	f.write("<h2> Today's temperature: "+currentweather[0]+" Celsuis"+ " Description: <em class=\"head\">"+ currentweatherdesc + "</em></h2>\n")
+	f.write("<h2> Today's temperature: "+currentweather[0]+" Celsius</h2>")
+	f.write("<h2>Conditions: <em class=\"head\">"+ currentweatherdesc + "</em></h2>\n")
 	time=time.scan(/[A-Z][a-z]+/)
 	futuredescriptions=page.css("div div table.tbbox tr.d0 table tbody tr.c1")[0].text
 	#refactor to go through loop to gsub each value)
@@ -55,7 +56,9 @@ File.open('weather.html', 'w') do |f|
 		pic="clouds.jpg" if currentweatherdesc.match(/cloudy/i)
 		pic="passingclouds.jpg" if currentweatherdesc.match(/scattered|broken|passing/i)
 		pic="rain.jpg" if currentweatherdesc.match(/rain/i) || currentweatherdesc.match(/shower/i)
-		c.write("html {\n background: url(#{pic}) no-repeat center center fixed;\n-webkit-background-size: cover;\n-moz-background-size: cover;\n-o-background-size: cover;\nbackground-size: cover;\n}\n\n* {\ncolor: #660099;\nfont-size: 25px;\n} \nh2,\nem.head {\n font-size:46px;\n}\nfooter p,\nfooter a{\ncolor: red;\n}\ndiv p {\n margin: auto;\ntext-align:center;\nopacity:0.4;\nfilter:alpha(opacity=40);\n}\ndiv p:hover {\nopacity:1.0;\nfilter:alpha(opacity=100);\n}\ndiv p:nth-child(even) {\ncolor:white;\nbackground-color:black;\n}\ndiv p:nth-child(odd) {\ncolor:black;\nbackground-color:white;\n}")
+		pic="sunny.jpg" if currentweatherdesc.match(/sun/) && !currentweatherdesc.match(/cloud/)
+
+		c.write("html {\n background: url(#{pic}) no-repeat center center fixed;\n-webkit-background-size: cover;\n-moz-background-size: cover;\n-o-background-size: cover;\nbackground-size: cover;\n}\n\n* {\ncolor: #660099;\nfont-size: 25px;\n} \nh2,\nem.head {\n font-size:46px;\nline-height:10%;\n}\nfooter p,\nfooter a,\na{\ncolor: red;\nline-height:10%;\n}\ndiv p {\n margin: auto;\ntext-align:center;\nopacity:0.4;\nfilter:alpha(opacity=40);\n}\ndiv p:hover {\nopacity:1.0;\nfilter:alpha(opacity=100);\n}\ndiv p:nth-child(even) {\ncolor:white;\nbackground-color:black;\n}\ndiv p:nth-child(odd) {\ncolor:black;\nbackground-color:white;\n}")
 	end
 
 =begin

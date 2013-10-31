@@ -1,5 +1,5 @@
 html {
- background: url(passingclouds.jpg) no-repeat center center fixed;
+ background: url(sunny.jpg) no-repeat center center fixed;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
@@ -13,10 +13,13 @@ font-size: 25px;
 h2,
 em.head {
  font-size:46px;
+line-height:10%;
 }
 footer p,
-footer a{
+footer a,
+a{
 color: red;
+line-height:10%;
 }
 div p {
  margin: auto;
