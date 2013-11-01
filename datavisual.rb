@@ -31,6 +31,7 @@ File.open('weather.html', 'w') do |f|
 	time=page.css("div div table.tbbox tr.d0 thead tr.c1")[1].text
 	futureweather=page.css("div div table.tbbox tr.d0 table tbody tr.c0")[1].text
 	currentweather=currentweather.scan(/\d+/)
+	p currentweather
 	
 	f.write("<h2> Today's temperature: "+currentweather[0]+" Celsius</h2>")
 	f.write("<h2>Conditions: <em class=\"head\">"+ currentweatherdesc + "</em></h2>\n")
