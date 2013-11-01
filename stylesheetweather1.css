@@ -1,15 +1,17 @@
 html {
- background: url(sprinkles.jpg) no-repeat center center fixed;
+ background: url(sunny.jpg) no-repeat center center fixed;
 -webkit-background-size: cover;
 -moz-background-size: cover;
 -o-background-size: cover;
 background-size: cover;
-}.graph {
+}
+.graph {
 background-color: rgba(120,32,32,0.5);
 border: 1px solid black;
 }
 img.chart {
 margin:auto;
+display:inline;
 }
 * {
 color: #660099;
@@ -50,4 +52,9 @@ div:not(.graph) {
 background-color: rgba(276,34,54,0.5);
 border-radius: 5%;
 width:80vw;
+}
+img.weatherpic {
+width:500px;
+height:380px
+display:inline;
 }

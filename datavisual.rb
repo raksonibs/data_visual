@@ -63,13 +63,14 @@ File.open('weather.html', 'w') do |f|
 	timevals=time.unshift(now)
 
 
+
 	chart=Gchart.line(:title => "Temperature over the next few hours", 
 					  :title_size=> 23, 
 					  :title_color=> 'FF0000',
 					  :data =>[data],
-					  :size => '600x400',
-					  :axis_with_labels => 'x,y',
-					  :axis_labels => [timevals,data1])
+					  :size => '500x350',
+					  :axis_with_labels => 'r,x,y',
+					  :axis_labels => [[0],timevals,data.sort])
 	currentconditions.each do |i|
 		index+=1 if i.flatten[1]=="Night"
 
@@ -100,7 +101,7 @@ File.open('weather.html', 'w') do |f|
 		pic="fog.jpg" if currentweatherdesc.match(/fog/i)
 		pic="sprinkles.jpg" if currentweatherdesc.match(/sprinkles/i)
 
-		c.write("html {\n background: url(#{pic}) no-repeat center center fixed;\n-webkit-background-size: cover;\n-moz-background-size: cover;\n-o-background-size: cover;\nbackground-size: cover;\n}.graph {\nbackground-color: rgba(120,32,32,0.5);\nborder: 1px solid black;\n}\nimg.chart {\nmargin:auto;\n}\n* {\ncolor: #660099;\nfont-size: 25px;\n} \nh2,\nem.head {\n font-size:46px;\nline-height:10%;\n}\nfooter p,\nfooter a,\na{\ncolor: red;\nline-height:10%;\n}\ndiv p {\n margin: auto;\ntext-align:center;\nopacity:0.4;\nfilter:alpha(opacity=40);\nborder-radius:4%;\nwidth: 60vw;\n}\ndiv p:hover {\nopacity:1.0;\nfilter:alpha(opacity=100);\n}\ndiv p:nth-child(even) {\ncolor:white;\nbackground-color:black;\n}\ndiv p:nth-child(odd) {\ncolor:black;\nbackground-color:white;\n}\ndiv:not(.graph) {\nbackground-color: rgba(276,34,54,0.5);\nborder-radius: 5%;\nwidth:80vw;\n}")
+		c.write("html {\n background: url(#{pic}) no-repeat center center fixed;\n-webkit-background-size: cover;\n-moz-background-size: cover;\n-o-background-size: cover;\nbackground-size: cover;\n}\n.graph {\nbackground-color: rgba(120,32,32,0.5);\nborder: 1px solid black;\n}\nimg.chart {\nmargin:auto;\ndisplay:inline;\n}\n* {\ncolor: #660099;\nfont-size: 25px;\n} \nh2,\nem.head {\n font-size:46px;\nline-height:10%;\n}\nfooter p,\nfooter a,\na{\ncolor: red;\nline-height:10%;\n}\ndiv p {\n margin: auto;\ntext-align:center;\nopacity:0.4;\nfilter:alpha(opacity=40);\nborder-radius:4%;\nwidth: 60vw;\n}\ndiv p:hover {\nopacity:1.0;\nfilter:alpha(opacity=100);\n}\ndiv p:nth-child(even) {\ncolor:white;\nbackground-color:black;\n}\ndiv p:nth-child(odd) {\ncolor:black;\nbackground-color:white;\n}\ndiv:not(.graph) {\nbackground-color: rgba(276,34,54,0.5);\nborder-radius: 5%;\nwidth:80vw;\n}\nimg.weatherpic {\nwidth:500px;\nheight:380px\ndisplay:inline;\n}")
 	end
 end
 
