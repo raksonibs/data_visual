@@ -1,0 +1,7 @@
+page=Nokogiri::HTML(open("http://www.timeanddate.com/weather/canada/hamilton"))
+	#puts page
+
+
+currentweather=page.css("body div div div#main-content div#weather-info")
+
+p currentweather

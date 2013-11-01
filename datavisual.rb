@@ -92,7 +92,7 @@ File.open('weather.html', 'w') do |f|
 		f.write("<p>"+i[0]+" temperature: "+i[1]+" Celsius</p>\n")
 	end
 =end
-	f.write("\n</div>\n<div class= \"graph\">\n<img class=\"chart\"src=#{chart}>\n<img class =\"weatherpic\" src=\"http://www.cdn.mto.gov.on.ca/english/traveller/compass/camera/pictures/BurlCamera/loc04.jpg\">\n</div>\n<footer>\n<hr>\n<p> Contact me if you are interested in weather </p>\n<p> 905-575-5111 </p>\n<p> skype: oskarniburski </p>\n<a href=\"mailto:oskarniburski@gmail.com\">oskarniburski@gmail.com</a>\n</footer>\n</body>\n</html>")
+	f.write("\n</div>\n<div class= \"graph\">\n<img class=\"chart\"src=#{chart}>\n<img class =\"weatherpic\" title=\"Hamilton Right Now\" src=\"http://www.cdn.mto.gov.on.ca/english/traveller/compass/camera/pictures/BurlCamera/loc04.jpg\">\n</div>\n<footer>\n<hr>\n<p> Contact me if you are interested in weather </p>\n<p> 905-575-5111 </p>\n<p> skype: oskarniburski </p>\n<a href=\"mailto:oskarniburski@gmail.com\">oskarniburski@gmail.com</a>\n</footer>\n</body>\n</html>")
 	File.open("stylesheetweather1.css", "w") do |c|
 
 		pic="clouds.jpg" if currentweatherdesc.match(/cloudy/i)
@@ -102,7 +102,7 @@ File.open('weather.html', 'w') do |f|
 		pic="fog.jpg" if currentweatherdesc.match(/fog/i)
 		pic="sprinkles.jpg" if currentweatherdesc.match(/sprinkles/i)
 
-		c.write("html {\n background: url(#{pic}) no-repeat center center fixed;\n-webkit-background-size: cover;\n-moz-background-size: cover;\n-o-background-size: cover;\nbackground-size: cover;\n}\n.graph {\nbackground-color: rgba(120,32,32,0.5);\nborder: 1px solid black;\n}\nimg.chart {\nmargin:auto;\ndisplay:inline;\n}\n* {\ncolor: #660099;\nfont-size: 25px;\n} \nh2,\nem.head {\n font-size:46px;\nline-height:10%;\n}\nfooter p,\nfooter a,\na{\ncolor: red;\nline-height:10%;\n}\ndiv p {\n margin: auto;\ntext-align:center;\nopacity:0.4;\nfilter:alpha(opacity=40);\nborder-radius:4%;\nwidth: 60vw;\n}\ndiv p:hover {\nopacity:1.0;\nfilter:alpha(opacity=100);\n}\ndiv p:nth-child(even) {\ncolor:white;\nbackground-color:black;\n}\ndiv p:nth-child(odd) {\ncolor:black;\nbackground-color:white;\n}\ndiv:not(.graph) {\nbackground-color: rgba(276,34,54,0.5);\nborder-radius: 5%;\nwidth:80vw;\n}\nimg.weatherpic {\nwidth:500px;\nheight:380px\ndisplay:inline;\n}")
+		c.write("html {\n background: url(#{pic}) no-repeat center center fixed;\n-webkit-background-size: cover;\n-moz-background-size: cover;\n-o-background-size: cover;\nbackground-size: cover;\n}div {\nmargin: auto;\n}\n.graph {\nbackground-color: rgba(120,32,32,0.5);\nborder: 1px solid black;\n}\nimg.chart {\nmargin:auto;\ndisplay:inline;\n}\n* {\ncolor: #660099;\nfont-size: 25px;\n} \nh2,\nem.head {\n font-size:46px;\nline-height:10%;\n}\nfooter p,\nfooter a,\na{\ncolor: red;\nline-height:10%;\n}\ndiv p {\n margin: auto;\ntext-align:center;\nopacity:0.4;\nfilter:alpha(opacity=40);\nborder-radius:4%;\nwidth: 60vw;\n}\ndiv p:hover {\nopacity:1.0;\nfilter:alpha(opacity=100);\n}\ndiv p:nth-child(even) {\ncolor:white;\nbackground-color:black;\n}\ndiv p:nth-child(odd) {\ncolor:black;\nbackground-color:white;\n}\ndiv:not(.graph) {\nbackground-color: rgba(276,34,54,0.5);\nborder-radius: 5%;\nwidth:80vw;\n}\nimg.weatherpic {\nwidth:500px;\nheight:380px\ndisplay:inline;\n}")
 	end
 end
 
